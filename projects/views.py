@@ -1,13 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render # render recebe a informação passado no settings
+#sobre a pasta templates, então agora podemos referencia-la utilizando return render.
 
-# Create your views here.
 from django.http import HttpResponse
 
 
 def projects(request):
-    return HttpResponse('Aqui está o primeiro projeto')
+    return render(request, 'projects/project.html')
 
 
 def project(request, pk):
-    return HttpResponse('Aqui está o primeiro projeto unico' + ' ' + str(pk))
+    return render(request, 'projects/single-project.html')
 
