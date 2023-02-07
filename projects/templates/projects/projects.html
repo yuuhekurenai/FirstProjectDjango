@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'main.html' %}
+
+{% include 'navbar.html' %}
+
+
+{% block content %}
+    <p>Olá você está na aba {{ page }}</p>
+    {% if number < 10 %}
+    <p>O numero é menor que 10 o numero é igual á {{ number }}</p>
+        {% else %}
+        <p>O número não é menor que 10</p>
+    {% endif %}
+
+<h1>Projects</h1>
+     <ul>
+     {% for project in projects%}
+         <li>
+             Title: <a href="{% url 'project' project.id %}"> {{ project.title }}</a> --- {{ project.description }}
+         </li>
+
+     {% endfor %}
+     </ul>
+
+{% endblock content %}
+</body>
+</html>
