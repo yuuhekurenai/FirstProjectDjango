@@ -3,6 +3,8 @@ from .models import Project
 # render recebe a informação passado no settings
 # sobre a pasta templates, então agora podemos referenciá-la utilizando return render.
 
+from .forms import Projectform
+
 from django.http import HttpResponse
 
 ProjectList = [
@@ -23,7 +25,6 @@ ProjectList = [
     },
 ]
 
-
 def projects(request):
     projects = Project.objects.all()
     context = {'projects': projects}
@@ -33,3 +34,8 @@ def projects(request):
 def project(request, pk):
     ProjectObj = Project.objects.get(id=pk)
     return render(request, 'projects/single-project.html', {'project': ProjectObj})
+
+def createProject(request):
+    form = Projectform()
+    context = {'form': form}
+    return render(request, "projects/project_form.html", context)
