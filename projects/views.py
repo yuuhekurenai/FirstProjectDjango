@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Project
 # render recebe a informação passado no settings
 # sobre a pasta templates, então agora podemos referenciá-la utilizando return render.
 
@@ -24,15 +25,11 @@ ProjectList = [
 
 
 def projects(request):
-    page = 'Project'
-    number = 8
-    context = {'page': page, 'number': number, 'projects': ProjectList}
+    projects = Project.objects.all()
+    context = {'projects': projects}
     return render(request, 'projects/projects.html', context)
 
 
 def project(request, pk):
-    ProjectObj = None
-    for i in ProjectList:
-        if i['id'] == pk:
-            ProjectObj = i
+    ProjectObj = Project.objects.get(id=pk)
     return render(request, 'projects/single-project.html', {'project': ProjectObj})
