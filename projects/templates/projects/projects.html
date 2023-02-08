@@ -11,22 +11,29 @@
 
 
 {% block content %}
-    <p>Olá você está na aba {{ page }}</p>
-    {% if number < 10 %}
-    <p>O numero é menor que 10 o numero é igual á {{ number }}</p>
-        {% else %}
-        <p>O número não é menor que 10</p>
-    {% endif %}
 
 <h1>Projects</h1>
-     <ul>
-     {% for project in projects%}
-         <li>
-             Title: <a href="{% url 'project' project.id %}"> {{ project.title }}</a> --- {{ project.description }}
-         </li>
 
-     {% endfor %}
-     </ul>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Project</th>
+            <th>Votes</th>
+            <th>Ratio</th>
+            <th></th>
+        </tr>
+        {% for project in projects%}
+        <tr>
+        <td>{{ project.id }}</td>
+            <td>{{ project.title }}</td>
+        <td>{{ project.vote_total }}</td>
+        <td>{{ project.vote_ratio }}</td>
+        <td>{{ project.created }}</td>
+        <td><a href="{% url 'project' project.id %}">View</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
 
 {% endblock content %}
 </body>
