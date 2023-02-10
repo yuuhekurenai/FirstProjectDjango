@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3#kxzhqr9&3g%y%pby+x9ds71l5vo)2^8erdvud*ur71e$m52l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -49,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'FirstProjectDjango.urls'
@@ -120,10 +122,19 @@ USE_TZ = True
 
 # Configurado o acesso para arquivos estáticos.
 STATIC_URL = 'static/'
+MEDIA_URL = '/images/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')  # Ou BASE_DIR / 'static'
 ]
 
+#  O MEDIA_ROOT informa para o django onde armazenar as imagens upadas pelos usuários
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+# Criar a static_root é uma maneira de amarzenar as images durante a criação do projeto
+# Então utilizamos o collectstatics no terminal para coletar todos os arquivos staticos e unilos na pasta informada.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
