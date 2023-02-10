@@ -7,23 +7,6 @@ from .forms import Projectform
 
 from django.http import HttpResponse
 
-ProjectList = [
-    {
-        'id': '1',
-        'title': "Ecommerce Website",
-        'description': 'Fully functional ecommerce website',
-    },
-    {
-        'id': '2',
-        'title': "Portfolio Website",
-        'description': 'This was a project where I built out my portifolio',
-    },
-    {
-        'id': '3',
-        'title': "Social Network",
-        'description': ' Awesome open source project I am still working on'
-    },
-]
 
 def projects(request):
     projects = Project.objects.all()
@@ -35,30 +18,33 @@ def project(request, pk):
     ProjectObj = Project.objects.get(id=pk)
     return render(request, 'projects/single-project.html', {'project': ProjectObj})
 
+
 def createProject(request):
     form = Projectform()
 
     if request.method == 'POST':
-        form = Projectform(request.POST)
+        form = Projectform(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('projects')
 
     context = {'form': form}
     return render(request, "projects/project_form.html", context)
+
 
 def updateProject(request, pk):
     project = Project.objects.get(id=pk)
     form = Projectform(instance=project)
 
     if request.method == 'POST':
-        form = Projectform(request.POST, instance=project)
+        form = Projectform(request.POST, request.FILES, instance=project)
         if form.is_valid():
             form.save()
             return redirect('projects')
 
     context = {'form': form}
     return render(request, "projects/project_form.html", context)
+
 
 def deleteProject(request, pk):
     project = Project.objects.get(id=pk)

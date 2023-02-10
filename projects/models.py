@@ -6,6 +6,9 @@ import uuid
 class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
+    # Ao adicionar o modelo padrão de imagem default='default.jpg' é necessário instalar a library pillow.
+    # A library pillow faz o processamento da imagem.
+    featured_image = models.ImageField(null=True, blank=True, default='default.jpg')
     demo_link = models.CharField(max_length=2000, blank=True)
     source_code = models.CharField(max_length=2000, null=True, blank=True)
     # Criada relação ManyToMany com o modelo Tag, referênciada em aspas simples.

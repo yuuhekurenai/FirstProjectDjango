@@ -8,6 +8,7 @@
 {% extends 'main.html' %}
 
 {% block content %}
+    <img style="max-width: 500px" src="{{ project.featured_image.url }}">
 <h1>{{ project.title }}</h1>
     <!-- Neste caso a query foi feita direitamente no loop, não é necessario parenteses .all() no método-->
     {% for tag in project.tags.all %}
