@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'projects.apps.ProjectsConfig',  # Informando o caminho do novo app criado.
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
