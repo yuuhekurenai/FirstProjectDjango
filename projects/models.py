@@ -1,9 +1,12 @@
 from django.db import models
 import uuid
+from users.models import Profile
 # import da library uuid como garantia de que o id não seja repetido.
 
 # A modelagem do banco de dados utilizando models do Django.
 class Project(models.Model):
+    # Owner irá relacionar com o models users.modes.Profile
+    Owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     # Ao adicionar o modelo padrão de imagem default='default.jpg' é necessário instalar a library pillow.
