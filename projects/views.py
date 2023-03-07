@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Project
 # render recebe a informação passado no settings
 # sobre a pasta templates, então agora podemos referenciá-la utilizando return render.
@@ -18,7 +19,7 @@ def project(request, pk):
     ProjectObj = Project.objects.get(id=pk)
     return render(request, 'projects/single-project.html', {'project': ProjectObj})
 
-
+@login_required(login_url='login')
 def createProject(request):
     form = Projectform()
 
@@ -31,7 +32,7 @@ def createProject(request):
     context = {'form': form}
     return render(request, "projects/project_form.html", context)
 
-
+@login_required(login_url='login')
 def updateProject(request, pk):
     project = Project.objects.get(id=pk)
     form = Projectform(instance=project)
@@ -45,7 +46,7 @@ def updateProject(request, pk):
     context = {'form': form}
     return render(request, "projects/project_form.html", context)
 
-
+@login_required(login_url='login')
 def deleteProject(request, pk):
     project = Project.objects.get(id=pk)
     if request.method == 'POST':
